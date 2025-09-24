@@ -1,0 +1,6 @@
+# OSX Files
+*.DS_Store
+composer.lock
+docker-compose.yml
+Dockerfile*
+vendor

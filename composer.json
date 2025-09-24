@@ -1,0 +1,12 @@
+{
+    "name" : "yan/history-versionable-behavior",
+    "description": "This behavior extends the versionable behavior to allow saving of versions even if active record is deleted",
+    "keywords": ["propel", "propel1", "behavior", "versionable", "history versionable"],
+    "license": "MIT",
+    "require": {
+        "propel/propel1": "^1.6.8"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    }
+}
