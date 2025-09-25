@@ -2,6 +2,7 @@
 
 // This is how the versionable behavior works
 require_once dirname(__FILE__) . '/HistoryVersionableBehaviorObjectBuilderModifier.php';
+require_once dirname(__FILE__) . '/HistoryVersionableBehaviorPeerBuilderModifier.php';
 
 class HistoryVersionableBehavior extends \VersionableBehavior
 {
@@ -15,7 +16,8 @@ class HistoryVersionableBehavior extends \VersionableBehavior
         'version_created_at_column' => 'version_created_at',
         'version_created_by_column' => 'version_created_by',
         'version_comment_column' => 'version_comment',
-        'version_archived_at_column' => 'version_archived_at'
+        'version_archived_at_column' => 'version_archived_at',
+        'enable_versioning_by_default' => 'false',
     );
 
     /**
@@ -89,5 +91,19 @@ class HistoryVersionableBehavior extends \VersionableBehavior
         }
 
         return $this->objectBuilderModifier;
+    }
+
+    /**
+     * Point to the custom peer builder class
+     * 
+     * @return HistoryVersionableBehaviorPeerBuilderModifier
+     */
+    public function getPeerBuilderModifier()
+    {
+        if (is_null($this->peerBuilderModifier)) {
+            $this->peerBuilderModifier = new HistoryVersionableBehaviorPeerBuilderModifier($this);
+        }
+
+        return $this->peerBuilderModifier;
     }
 }
