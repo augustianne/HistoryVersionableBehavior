@@ -38,6 +38,32 @@ class HistoryVersionableBehaviorTest extends \TestCase
         ];
     }
 
+    public function getObjectVersionMethodDefaultData()
+    {
+        return [
+            ['getId', true],
+            ['getName', true],
+            ['getVersion', true],
+            ['getVersionArchivedAt', true],
+            ['getVersionCreatedBy', false],
+            ['getVersionCreatedAt', false],
+            ['getVersionComment', false],
+        ];
+    }
+
+    public function getObjectVersionMethodLogFieldsSetData()
+    {
+        return [
+            ['getId', true],
+            ['getName', true],
+            ['getVersion', true],
+            ['getVersionArchivedAt', true],
+            ['getVersionCreatedBy', true],
+            ['getVersionCreatedAt', true],
+            ['getVersionComment', true],
+        ];
+    }
+
     private function buildSchema($schema, $class)
     {
         if (!class_exists($class)) {
@@ -69,7 +95,7 @@ XML;
 
     /**
      * @covers Autodeal\FleetBundle\Service\AccessControl\SystemOperation\SystemOperationRegistry::getOperationsBySection
-     * @dataProvider getObjectMethodDefaultData
+     * @dataProvider getObjectVersionMethodDefaultData
      */
     public function testVersionObjectMethodDefault($method, $expected)
     {
@@ -115,7 +141,7 @@ XML;
 
     /**
      * @covers Autodeal\FleetBundle\Service\AccessControl\SystemOperation\SystemOperationRegistry::getOperationsBySection
-     * @dataProvider getObjectMethodLogFieldsSetData
+     * @dataProvider getObjectVersionMethodLogFieldsSetData
      */
     public function testVersionObjectMethodLogFieldsSet($method, $expected)
     {
@@ -136,7 +162,5 @@ XML;
 
         $this->assertTrue(class_exists('CarVersion'));
         $this->assertEquals($expected, method_exists('CarVersion', $method));
-
-        var_dump(method_exists('BaseCarVersion', 'setOnDelete'));
     }
 }

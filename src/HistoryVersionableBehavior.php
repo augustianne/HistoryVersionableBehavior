@@ -18,6 +18,10 @@ class HistoryVersionableBehavior extends \VersionableBehavior
         'version_archived_at_column' => 'version_archived_at'
     );
 
+    /**
+     * Let's just add the version_archived_at_column column for uniformity of implementation
+     * Even though it won't get populated as object will be deleted
+     */
     protected function addLogColumns()
     {
         parent::addLogColumns();
@@ -53,14 +57,14 @@ class HistoryVersionableBehavior extends \VersionableBehavior
         }
     }
 
-    // protected function addVersionArchivedColumn()
-    // {
-    //     $versionTable = $this->lookupVersionTable();
-    //     $versionTable->addColumn(array(
-    //         'name' => 'version_archived_at',
-    //         'type' => 'timestamp',
-    //     ));
-    // }
+    protected function addVersionArchivedColumn()
+    {
+        $versionTable = $this->lookupVersionTable();
+        $versionTable->addColumn(array(
+            'name' => 'version_archived_at',
+            'type' => 'timestamp',
+        ));
+    }
 
     protected function lookupVersionTable()
     {
